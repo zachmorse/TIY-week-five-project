@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Word Guess</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--<link href="css/style.css" rel="stylesheet">-->
+</head>
+
+<body>
+	<h1>Welcome to the Word Guess Game!</h1>
+	<h3>We have selected the word of the game at random. It is displayed below:</h3>
+	<h3>{{game.displayArray}}</h3>
+	<h4>Number of guesses remaining: {{game.guessAmount}}</h4>
+
+	<form action="/guess" method="post">
+		<input type="text" name="guess" id="userGuess" placeholder="guess a letter">
+		<input type="submit" value="take a guess">
+	</form>
+
+	<h3>Letters you have guessed: {{game.lettersGuessed}}</h3>
+
+
+
+
+</body>
+
+</html>
