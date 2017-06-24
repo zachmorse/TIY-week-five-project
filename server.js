@@ -13,26 +13,6 @@ const words = fs
   .toLowerCase()
   .split("\n");
 
-const mysteryWord = words[Math.floor(Math.random() * 45000)];
-var displayArray = (function() {
-  var dummyArray = [];
-  var arrayLength = mysteryWord.length;
-  for (var i = 0; i < arrayLength; i++) {
-    dummyArray.push("_");
-  }
-  return dummyArray;
-})();
-
-var game = {
-  guessAmount: 8,
-  mysteryWord: mysteryWord,
-  lettersGuessed: [],
-  correctGuesses: [],
-  displayArray: displayArray.join(" ")
-};
-
-console.log(game);
-
 // set view engine:
 
 app.engine("mustache", mustacheExpress());
@@ -49,6 +29,27 @@ app.use(session(sessionConfig));
 //   next();
 // });
 
+// --- game variables
+
+const mysteryWord = words[Math.floor(Math.random() * 45000)].split("");
+var displayArray = (function() {
+  var dummyArray = [];
+  var arrayLength = mysteryWord.length;
+  for (var i = 0; i < arrayLength; i++) {
+    dummyArray.push("_");
+  }
+  return dummyArray;
+})();
+
+var game = {
+  guessAmount: 8,
+  mysteryWord: mysteryWord,
+  lettersGuessed: [],
+  displayArray: displayArray
+};
+
+console.log(game);
+
 // ROUTES
 
 app.get("/", function(req, res) {
@@ -56,6 +57,18 @@ app.get("/", function(req, res) {
 });
 
 app.post("/guess", function(req, res) {
+  var userGuess = req.body.guess;
+
+  mysteryWord.forEach(function(letter, index) {
+    if (userGuess === letter) {
+      console.log(game.displayArray);
+      game.displayArray.splice(index, 1, letter);
+      // game.displayArray.join(" ");
+      console.log("game.displayArray: ", game.displayArray);
+    }
+  });
+
+  game.lettersGuessed.push(req.body.guess);
   res.redirect("/");
 });
 
