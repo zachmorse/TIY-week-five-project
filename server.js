@@ -31,7 +31,7 @@ app.use(session(sessionConfig));
 
 // --- game variables
 
-const mysteryWord = words[Math.floor(Math.random() * 45000)].split("");
+const mysteryWord = words[Math.floor(Math.random() * 200000)].split("");
 var displayArray = (function() {
   var dummyArray = [];
   var arrayLength = mysteryWord.length;
@@ -45,7 +45,8 @@ var game = {
   guessAmount: 8,
   mysteryWord: mysteryWord,
   lettersGuessed: [],
-  displayArray: displayArray
+  displayArray: displayArray,
+  userDisplayString: displayArray.join(" ")
 };
 
 console.log(game);
@@ -61,13 +62,17 @@ app.post("/guess", function(req, res) {
 
   mysteryWord.forEach(function(letter, index) {
     if (userGuess === letter) {
-      console.log(game.displayArray);
-      game.displayArray.splice(index, 1, letter);
-      // game.displayArray.join(" ");
-      console.log("game.displayArray: ", game.displayArray);
+      game.displayArray[index] = mysteryWord[index];
+
+      console.log("LINE 67, game.displayArray: ", game.displayArray);
     }
   });
 
+  if (mysteryWord.indexOf(userGuess) < 0) {
+    game.guessAmount -= 1;
+  }
+  game.userDisplayString = game.displayArray.join(" ");
+  game.userDisplayString = game.userDisplayString.toUpperCase();
   game.lettersGuessed.push(req.body.guess);
   res.redirect("/");
 });
