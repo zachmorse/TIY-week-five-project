@@ -15,7 +15,7 @@
 	<h4>Number of guesses remaining: {{game.guessAmount}}</h4>
 	<h4>{{game.statusMessage}}</h4>
 	<form action="/guess" method="post">
-		<input type="text" name="guess" id="userGuess" maxlength="1" placeholder="guess a letter">
+		<input type="text" name="guess" id="userGuess" maxlength="1" autofocus="autofocus" placeholder="guess a letter">
 		<input type="submit" value="take a guess">
 	</form>
 

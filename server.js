@@ -27,6 +27,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(session(sessionConfig));
 
+function gameValidator(req, res, next) {
+  if (game.guessAmount == 0 && game.displayArray.indexOf("_") >= 0) {
+    game.endingMessage = "You have been defeated.";
+    res.redirect("/gameover");
+  } else if (game.guessAmount >= 1 && game.displayArray.indexOf("_") < 0) {
+    game.endingMessage = "You are Victorious!";
+    res.redirect("/gameover");
+  } else {
+    next();
+  }
+}
+
 // --- game variables
 
 const mysteryWord = words[Math.floor(Math.random() * 200000)]
@@ -49,15 +61,20 @@ var game = {
   userDisplayGuessed: "",
   displayArray: displayArray,
   userDisplayString: displayArray.join(" "),
-  statusMessage: "Type To Begin!"
+  statusMessage: "Type To Begin!",
+  endingMessage: ""
 };
 
 console.log("Game word: ", game.mysteryWord.join(""));
 
 // --- ROUTES
 
-app.get("/", function(req, res) {
+app.get("/", gameValidator, function(req, res) {
   res.render("index", { game: game });
+});
+
+app.get("/gameover", function(req, res) {
+  res.render("gameover", { game: game });
 });
 
 app.post("/guess", function(req, res) {
@@ -65,8 +82,6 @@ app.post("/guess", function(req, res) {
   game.statusMessage = " ";
 
   function inputValidator() {
-    req.checkBody(userGuess).isAlpha();
-
     if (userGuess.length == 0) {
       game.statusMessage = "You must enter a character";
       res.redirect("/");
@@ -78,7 +93,7 @@ app.post("/guess", function(req, res) {
     } else if (mysteryWord.indexOf(userGuess) < 0) {
       game.guessAmount -= 1;
       game.lettersGuessed.push(userGuess);
-      game.statusMessage = "Try Again";
+      game.statusMessage = "Sorry, Try Again.";
       res.redirect("/");
     } else {
       game.lettersGuessed.push(userGuess);
@@ -90,11 +105,10 @@ app.post("/guess", function(req, res) {
       });
     }
     var errors = req.validationErrors();
-    console.log("errors: ", errors);
+    // console.log("errors: ", errors);
   }
 
   inputValidator();
-
   game.userDisplayString = game.displayArray.join(" ");
   game.userDisplayGuessed = game.lettersGuessed.join(" ");
   res.redirect("/");
