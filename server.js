@@ -32,6 +32,7 @@ app.use(session(sessionConfig));
 const mysteryWord = words[Math.floor(Math.random() * 200000)]
   .toUpperCase()
   .split("");
+var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,./~`-=";
 var displayArray = (function() {
   var dummyArray = [];
   var arrayLength = mysteryWord.length;
@@ -48,12 +49,10 @@ var game = {
   userDisplayGuessed: "",
   displayArray: displayArray,
   userDisplayString: displayArray.join(" "),
-  statusMessage: ""
+  statusMessage: "Type To Begin!"
 };
 
-console.log(game);
-
-// --- INPUT VALIDATION
+console.log("Game word: ", game.mysteryWord.join(""));
 
 // --- ROUTES
 
@@ -72,27 +71,30 @@ app.post("/guess", function(req, res) {
       game.statusMessage = "You must enter a character";
       res.redirect("/");
     } else if (game.lettersGuessed.indexOf(userGuess) >= 0) {
-      game.statusMessage = "Letter already guessed, enter different letter";
+      game.statusMessage = "Letter Already Guessed...";
       res.redirect("/");
+    } else if (specialChars.indexOf(userGuess) >= 0) {
+      game.statusMessage = "Special Characters Not Permitted";
     } else if (mysteryWord.indexOf(userGuess) < 0) {
       game.guessAmount -= 1;
       game.lettersGuessed.push(userGuess);
+      game.statusMessage = "Try Again";
       res.redirect("/");
     } else {
       game.lettersGuessed.push(userGuess);
+      game.statusMessage = "Good Job!";
       mysteryWord.forEach(function(letter, index) {
         if (userGuess === letter) {
           game.displayArray[index] = mysteryWord[index];
         }
       });
     }
-
     var errors = req.validationErrors();
     console.log("errors: ", errors);
   }
 
   inputValidator();
-  console.log(game);
+
   game.userDisplayString = game.displayArray.join(" ");
   game.userDisplayGuessed = game.lettersGuessed.join(" ");
   res.redirect("/");
