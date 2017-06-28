@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "Streamster";
+  src: url("./fonts/Streamster.ttf"); /* TTF file for CSS3 browsers */
+}
+
+@font-face {
+  font-family: "Lazer84";
+  src: url("./fonts/Lazer84.ttf"); /* TTF file for CSS3 browsers */
+}
+
+body {
+  margin: -21px 0px -21px 0px;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  font-family: "Lazer84";
+  animation-name: fadeFromBlack;
+  animation-duration: 1s;
+}
+
+@keyframes fadeFromBlack {
+  from {
+    filter: brightness(0%);
+  }
+  to {
+    filter: brightness(100%);
+  }
+}
+
+.background-image {
+  background: url("./images/img2.jpeg");
+  position: fixed;
+  background-position-y: 40%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-size: 100%;
+  filter: grayscale(0%) blur(0px);
+  animation-name: backgroundBlurAndFilter;
+  animation-duration: 5s;
+}
+
+@keyframes backgroundBlurAndFilter {
+  from {
+    background-image: url("./images/img1.jpeg");
+    filter: blur(25px);
+    filter: grayscale(100%);
+  }
+  to {
+    filter: blur(0px);
+    filter: grayscale(0%);
+    background-image: url("./images/img2.jpeg");
+  }
+}
+
+.game-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: whitesmoke;
+}
+
+.headline {
+  font-size: 100px;
+  font-weight: bold;
+  background: linear-gradient(330deg, #10f8fc 0%, #e05252 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px -7px 1px white;
+}
+
+/*color: -webkit-linear-gradient(#10f8fc, #fe316a);
+  /*-webkit-background-clip: text;*/
+/*-webkit-text-fill-color: transparent;*/
