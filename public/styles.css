@@ -15,14 +15,14 @@ body {
   justify-content: center;
   font-family: "Lazer84";
   animation-name: fadeFromBlack;
-  animation-duration: 1s;
+  animation-duration: 3s;
 }
 
 @keyframes fadeFromBlack {
-  from {
+  0% {
     filter: brightness(0%);
   }
-  to {
+  100% {
     filter: brightness(100%);
   }
 }
@@ -38,17 +38,23 @@ body {
   z-index: -1;
   background-size: 100%;
   filter: grayscale(0%) blur(0px);
-  animation-name: backgroundBlurAndFilter;
-  animation-duration: 5s;
+  animation: backgroundInit 5s linear 1;
 }
 
-@keyframes backgroundBlurAndFilter {
-  from {
+@keyframes backgroundInit {
+  0% {
+    filter: blur(30px);
+    filter: grayscale(100%);
+    background-position-y: 100%;
     background-image: url("./images/img1.jpeg");
-    filter: blur(25px);
+  }
+
+  75% {
+    background-image: url("./images/img1.jpeg");
+    background-position-y: 40%;
     filter: grayscale(100%);
   }
-  to {
+  100% {
     filter: blur(0px);
     filter: grayscale(0%);
     background-image: url("./images/img2.jpeg");
@@ -71,8 +77,34 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0px -7px 1px white;
+  animation: headerFadeIn;
+  animation-duration: 5s;
+  animation-timing-function: ease-in;
 }
 
-/*color: -webkit-linear-gradient(#10f8fc, #fe316a);
-  /*-webkit-background-clip: text;*/
-/*-webkit-text-fill-color: transparent;*/
+@keyframes headerFadeIn {
+  from {
+    filter: brightness(0%);
+  }
+  to {
+    filter: brightness(100%);
+  }
+}
+
+.blinking-cursor {
+  font-weight: 100;
+  color: #2E3D48;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+  100% {
+    color: transparent;
+  }
+}

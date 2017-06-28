@@ -96,7 +96,7 @@ app.post("/guess", function(req, res) {
       game.statusMessage = "Sorry, Try Again.";
       res.redirect("/");
     } else {
-      game.lettersGuessed.push(userGuess);
+      game.lettersGuessed.push(userGuess + " ");
       game.statusMessage = "Good Job!";
       mysteryWord.forEach(function(letter, index) {
         if (userGuess === letter) {
