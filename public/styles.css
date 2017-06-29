@@ -38,7 +38,7 @@ body {
   z-index: -1;
   background-size: 100%;
   filter: grayscale(0%) blur(0px);
-  animation: backgroundInit 5s linear 1;
+  animation: backgroundInit 5s ease-out 1;
 }
 
 @keyframes backgroundInit {
@@ -48,10 +48,11 @@ body {
     background-position-y: 100%;
     background-image: url("./images/img1.jpeg");
   }
-
-  75% {
-    background-image: url("./images/img1.jpeg");
+  50% {
     background-position-y: 40%;
+  }
+  85% {
+    background-image: url("./images/img1.jpeg");
     filter: grayscale(100%);
   }
   100% {
@@ -93,7 +94,7 @@ body {
 
 .blinking-cursor {
   font-weight: 100;
-  color: #2E3D48;
+  color: #2e3d48;
   animation: blink 1s infinite;
 }
 
