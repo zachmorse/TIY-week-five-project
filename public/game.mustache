@@ -12,15 +12,15 @@
 	<div class="background-image"></div>
 	<div class="game-container">
 		<h1 class="headline">WORDQUEST: IMPOSSIBLE</h1>
-		<h3>RANDOM WORD SELECTED... STORING NOW...</h3>
-		<h3>{{game.userDisplayString}}</h3>
-		<h4>GUESSES REMAINING:  {{game.guessAmount}}</h4>
+		<!--<h3>RANDOM WORD SELECTED... STORING NOW...</h3>-->
+		<h3 class="guess-display">{{game.userDisplayString}}</h3>
+		<h4>GUESSES REMAINING: {{game.guessAmount}}</h4>
 		<h4>{{game.statusMessage}}</h4>
 		<form action="/guess" method="post">
 			<input type="text" name="guess" id="userGuess" maxlength="1" autofocus="autofocus" placeholder="guess a letter">
 			<input type="submit" value="take a guess">
 		</form>
-		<h3>LETTERS GUESSED:  {{game.userDisplayGuessed}}<span class="blinking-cursor">|</span></h3>
+		<h3>LETTERS GUESSED: {{game.userDisplayGuessed}}<span class="blinking-cursor">|</span></h3>
 	</div>
 </body>
 

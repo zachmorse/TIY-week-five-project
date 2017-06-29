@@ -1,11 +1,16 @@
 @font-face {
   font-family: "Streamster";
-  src: url("./fonts/Streamster.ttf"); /* TTF file for CSS3 browsers */
+  src: url("../fonts/Streamster.ttf"); /* TTF file for CSS3 browsers */
 }
 
 @font-face {
   font-family: "Lazer84";
-  src: url("./fonts/Lazer84.ttf"); /* TTF file for CSS3 browsers */
+  src: url("../fonts/Lazer84.ttf"); /* TTF file for CSS3 browsers */
+}
+
+@font-face {
+  font-family: "SFAlienEncounters";
+  src: url("../fonts/SFAlienEncounters.ttf"); /* TTF file for CSS3 browsers */
 }
 
 body {
@@ -14,7 +19,7 @@ body {
   display: flex;
   justify-content: center;
   font-family: "Lazer84";
-  animation-name: fadeFromBlack;
+  /*animation-name: fadeFromBlack;*/
   animation-duration: 3s;
 }
 
@@ -28,7 +33,7 @@ body {
 }
 
 .background-image {
-  background: url("./images/img2.jpeg");
+  background: url("../images/img2.jpeg");
   position: fixed;
   background-position-y: 40%;
   width: 100%;
@@ -38,7 +43,7 @@ body {
   z-index: -1;
   background-size: 100%;
   filter: grayscale(0%) blur(0px);
-  animation: backgroundInit 5s ease-out 1;
+  /*animation: backgroundInit 5s ease-out 1;*/
 }
 
 @keyframes backgroundInit {
@@ -46,19 +51,19 @@ body {
     filter: blur(30px);
     filter: grayscale(100%);
     background-position-y: 100%;
-    background-image: url("./images/img1.jpeg");
+    background-image: url("../images/img1.jpeg");
   }
   50% {
     background-position-y: 40%;
   }
   85% {
-    background-image: url("./images/img1.jpeg");
+    background-image: url("../images/img1.jpeg");
     filter: grayscale(100%);
   }
   100% {
     filter: blur(0px);
     filter: grayscale(0%);
-    background-image: url("./images/img2.jpeg");
+    background-image: url("../images/img2.jpeg");
   }
 }
 
@@ -74,22 +79,30 @@ body {
 .headline {
   font-size: 100px;
   font-weight: bold;
+  margin-bottom: 0;
   background: linear-gradient(330deg, #10f8fc 0%, #e05252 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0px -7px 1px white;
-  animation: headerFadeIn;
+  /*animation: headerFadeIn;
   animation-duration: 5s;
-  animation-timing-function: ease-in;
+  animation-timing-function: ease-in-out;*/
 }
 
 @keyframes headerFadeIn {
-  from {
+  0% {
     filter: brightness(0%);
   }
-  to {
+  100% {
     filter: brightness(100%);
   }
+}
+
+.guess-display {
+  font-family: "Streamster";
+  font-size: 60px;
+  color: #2ad8fa;
+  text-shadow: 2px 1px 5px whitesmoke;
 }
 
 .blinking-cursor {

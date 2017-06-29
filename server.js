@@ -69,8 +69,14 @@ console.log("Game word: ", game.mysteryWord.join(""));
 
 // --- ROUTES
 
-app.get("/", gameValidator, function(req, res) {
-  res.render("index", { game: game });
+app.get("/", function(req, res) {
+  res.send("HELLOE WORLD");
+
+  res.redirect("/game");
+});
+
+app.get("/game", gameValidator, function(req, res) {
+  res.render("game", { game: game });
 });
 
 app.get("/gameover", function(req, res) {
@@ -81,37 +87,45 @@ app.post("/guess", function(req, res) {
   var userGuess = req.body.guess.toUpperCase();
   game.statusMessage = " ";
 
+  function alreadyGuessed() {
+    if (game.lettersGuessed.indexOf(userGuess) > -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   function inputValidator() {
     if (userGuess.length == 0) {
-      game.statusMessage = "You must enter a character";
-      res.redirect("/");
-    } else if (game.lettersGuessed.indexOf(userGuess) >= 0) {
-      game.statusMessage = "Letter Already Guessed...";
-      res.redirect("/");
+      game.statusMessage = "You Must Enter A Character.";
+      res.redirect("/game");
     } else if (specialChars.indexOf(userGuess) >= 0) {
-      game.statusMessage = "Special Characters Not Permitted";
+      game.statusMessage = "Special Characters Not Permitted!";
+    } else if (alreadyGuessed() == true) {
+      game.statusMessage = "Letter Already Guessed...";
+      res.redirect("/game");
     } else if (mysteryWord.indexOf(userGuess) < 0) {
       game.guessAmount -= 1;
       game.lettersGuessed.push(userGuess);
       game.statusMessage = "Sorry, Try Again.";
-      res.redirect("/");
+      res.redirect("/game");
     } else {
-      game.lettersGuessed.push(userGuess + " ");
-      game.statusMessage = "Good Job!";
       mysteryWord.forEach(function(letter, index) {
         if (userGuess === letter) {
           game.displayArray[index] = mysteryWord[index];
         }
       });
+      game.lettersGuessed.push(userGuess);
+      game.statusMessage = "Excellent!";
     }
+
     var errors = req.validationErrors();
-    // console.log("errors: ", errors);
   }
 
   inputValidator();
   game.userDisplayString = game.displayArray.join(" ");
   game.userDisplayGuessed = game.lettersGuessed.join(" ");
-  res.redirect("/");
+  res.redirect("/game");
 });
 
 // LISTENER
