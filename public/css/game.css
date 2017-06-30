@@ -21,6 +21,7 @@ body {
   font-family: "Lazer84";
   animation-name: fadeFromBlack;
   animation-duration: 3s;
+  background-color: black;
 }
 
 @keyframes fadeFromBlack {
@@ -62,25 +63,28 @@ body {
     filter: grayscale(100%);
     /*transform: scale3d(2, 2, 2);*/
   }
-  65% {
+  60% {
     background-position-y: 0%;
     background-image: url("../images/img1.jpeg");
     filter: grayscale(100%) brightness(0%);
     transform: scale3d(3, 3, 3);
   }
-  70% {
+  65% {
     background-position-y: 40%;
     transform: scale3d(1, 1, 1);
+    filter: blur(20px) grayscale(100%) brightness(0%);
   }
-  75% {
-    filter: blur(0px);
-    filter: grayscale(0%);
+  70% {
     background-image: url("../images/img2.jpeg");
-    /*transform: scale3d(1, 1, 1);*/
-    filter: brightness(1000%);
+    /*transform: scale3d(2.5, 2.5, 2.5);*/
+    filter: blur(20px) brightness(1000%) grayscale(0%);
+  }
+  80% {
+    /*transform: scale3d(2.5, 2.5, 2.5);*/
   }
   100% {
-    filter: brightness(100%);
+    filter: blur(0px) brightness(100%);
+    transform: scale3d(1, 1, 1);
   }
 }
 
@@ -102,7 +106,7 @@ body {
   -webkit-text-fill-color: transparent;
   text-shadow: 0px -7px 1px white;
   animation: headlineFadeIn;
-  animation-duration: 8s;
+  animation-duration: 9s;
   animation-timing-function: ease-in-out;
 }
 
