@@ -201,7 +201,7 @@ body {
   font-family: "AlienSolidItalic";
   font-size: 85px;
   color: #15f2ff;
-  text-shadow: 0em 0em 0.5em #15f2ff;
+  text-shadow: 0em 0em 0.5em #00cbd4;
   animation: clickPlayFadeIn;
   animation-duration: 18s;
   animation-timing-function: ease-in-out;

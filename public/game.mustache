@@ -13,13 +13,23 @@
 	<div class="game-container">
 		<h1 class="headline">WORDQUEST: IMPOSSIBLE</h1>
 		<h3 class="guess-display">{{game.userDisplayString}}</h3>
-		<h4>GUESSES REMAINING: {{game.guessAmount}}</h4>
-		<h4>{{game.statusMessage}}</h4>
-		<form action="/guess" method="post">
-			<input type="text" name="guess" id="userGuess" maxlength="1" autofocus="autofocus" placeholder="guess a letter">
-			<input type="submit" value="take a guess">
+		<div class="info-container">
+			<div class="box-one">
+				<h4 class="info-status">COMPUTATION STATUS: </h4>
+				<h4 class="info-remains">ATTEMPTS REMAINING: </h4>
+				<h4 class="info-guessed">CHARACTERS COMPUTED: </h4>
+			</div>
+			<div class="box-two">
+				<h4 class="gamestatus">{{game.statusMessage}}</h4>
+				<h4>{{game.guessAmount}}</h4>
+				<h4>{{game.userDisplayGuessed}}</h4>
+			</div>
+		</div>
+		<form action="/guess" method="post" class="choiceForm">
+			<input class="form-submit-button" type="submit" value="COMPUTE INPUT:">
+			<input type="text" class="userChoice" name="guess" id="userGuess" maxlength="1" autofocus="autofocus">
+
 		</form>
-		<h3>LETTERS GUESSED: {{game.userDisplayGuessed}}<span class="blinking-cursor">|</span></h3>
 	</div>
 </body>
 

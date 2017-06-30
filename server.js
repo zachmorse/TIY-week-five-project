@@ -29,9 +29,11 @@ app.use(session(sessionConfig));
 
 function gameValidator(req, res, next) {
   if (game.guessAmount == 0 && game.displayArray.indexOf("_") >= 0) {
+    game.displayArray = game.mysteryWord.join(" ");
     game.endingMessage = "You have been defeated.";
     res.redirect("/gameover");
   } else if (game.guessAmount >= 1 && game.displayArray.indexOf("_") < 0) {
+    game.displayArray = game.mysteryWord.join(" ");
     game.endingMessage = "You are Victorious!";
     res.redirect("/gameover");
   } else {
@@ -40,6 +42,20 @@ function gameValidator(req, res, next) {
 }
 
 // --- game variables
+const affirmations = [
+  "EXCELLENT",
+  "IT CHECKS OUT",
+  "AFFIRMATIVE",
+  "CORRECT",
+  "DATABASE_CLEAR = FALSE",
+  "BOOLEAN_TRUE!",
+  "OK",
+  "GUESS_STATUS=CORRECT"
+];
+
+function affirmativeWords() {
+  return affirmations[Math.floor(Math.random() * 8)];
+}
 
 const mysteryWord = words[Math.floor(Math.random() * 200000)]
   .toUpperCase()
@@ -58,10 +74,10 @@ var game = {
   guessAmount: 8,
   mysteryWord: mysteryWord,
   lettersGuessed: [],
-  userDisplayGuessed: "",
+  userDisplayGuessed: " ",
   displayArray: displayArray,
   userDisplayString: displayArray.join(" "),
-  statusMessage: "Type To Begin!",
+  statusMessage: "Type To Begin",
   endingMessage: ""
 };
 
@@ -114,7 +130,7 @@ app.post("/guess", function(req, res) {
         }
       });
       game.lettersGuessed.push(userGuess);
-      game.statusMessage = "Excellent!";
+      game.statusMessage = affirmativeWords();
     }
 
     var errors = req.validationErrors();

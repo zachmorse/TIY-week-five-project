@@ -2,14 +2,22 @@
 <html lang="en">
 
 <head>
-	<title></title>
+	<title>Word Guess</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link href="./css/gameover.css" rel="stylesheet">
 </head>
 
 <body>
-	<h1>{{game.endingMessage}}</h1>
+	<div class="background-image"></div>
+	<div class="game-container">
+		<h1 class="headline">WORDQUEST: IMPOSSIBLE</h1>
+		<h3 class="guess-display">{{game.displayArray}}</h3>
+		<!--<h1 class="end-message">{{game.endingMessage}}</h1>-->
+		<!--<a href="./game">
+			<h2 class="click-to-play">PLAY AGAIN?</h2>
+		</a>-->
+	</div>
 </body>
 
 </html>
