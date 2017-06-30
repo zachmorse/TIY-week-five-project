@@ -70,7 +70,7 @@ console.log("Game word: ", game.mysteryWord.join(""));
 // --- ROUTES
 
 app.get("/", function(req, res) {
-  res.redirect("/game");
+  res.render("index");
 });
 
 app.get("/game", gameValidator, function(req, res) {

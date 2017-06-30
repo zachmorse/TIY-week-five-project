@@ -1,0 +1,231 @@
+@font-face {
+  font-family: "Streamster";
+  src: url("../fonts/Streamster.ttf"); /* TTF file for CSS3 browsers */
+}
+
+@font-face {
+  font-family: "Lazer84";
+  src: url("../fonts/Lazer84.ttf"); /* TTF file for CSS3 browsers */
+}
+
+@font-face {
+  font-family: "AlienSolidItalic";
+  src: url("../fonts/SFAlienEncountersSolid-Ital.ttf"); /* TTF file for CSS3 browsers */
+}
+
+body {
+  margin: -21px 0px -21px 0px;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  font-family: "Lazer84";
+  animation-name: fadeFromBlack;
+  animation-duration: 3s;
+  background-color: black;
+}
+
+@keyframes fadeFromBlack {
+  0% {
+    filter: brightness(0%);
+  }
+  100% {
+    filter: brightness(100%);
+  }
+}
+
+.background-image {
+  background: url("../images/img2.jpeg");
+  position: fixed;
+  background-position-y: 40%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-size: 100%;
+  filter: grayscale(0%) blur(0px);
+  overflow: hidden;
+  animation: backgroundInit 8s ease-in-out 1;
+}
+
+@keyframes backgroundInit {
+  0% {
+    filter: blur(30px);
+    filter: brightness(100%);
+    filter: grayscale(100%);
+    background-position-y: 110%;
+    background-image: url("../images/img1.jpeg");
+  }
+  50% {
+    /*background-position-y: 40%;*/
+    filter: grayscale(100%);
+    filter: brightness(0%);
+    filter: grayscale(100%);
+    /*transform: scale3d(2, 2, 2);*/
+  }
+  60% {
+    background-position-y: 0%;
+    background-image: url("../images/img1.jpeg");
+    filter: grayscale(100%) brightness(0%);
+    transform: scale3d(3, 3, 3);
+  }
+  65% {
+    background-position-y: 40%;
+    transform: scale3d(1, 1, 1);
+    filter: blur(20px) grayscale(100%) brightness(0%);
+  }
+  70% {
+    background-image: url("../images/img2.jpeg");
+    /*transform: scale3d(2.5, 2.5, 2.5);*/
+    filter: blur(20px) brightness(1000%) grayscale(0%);
+  }
+  80% {
+    /*transform: scale3d(2.5, 2.5, 2.5);*/
+  }
+  100% {
+    filter: blur(0px) brightness(100%);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.game-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: whitesmoke;
+}
+
+.headline {
+  font-size: 100px;
+  font-weight: bold;
+  margin-bottom: 0;
+  background: linear-gradient(330deg, #10f8fc 0%, #e05252 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px -7px 1px white;
+  animation: headlineFadeIn;
+  animation-duration: 18s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes headlineFadeIn {
+  0% {
+    filter: brightness(0%);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+    filter: brightness(0%);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(100%);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(100%);
+  }
+}
+
+.randomword {
+  color: #ff073a;
+  text-shadow: 0em 0em 0.5em #d3002b;
+  font-size: 25px;
+  animation: randomWordFadeIn;
+  animation-duration: 18s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+  filter: brightness(0%);
+}
+
+@keyframes randomWordFadeIn {
+  0% {
+    filter: brightness(0%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+    filter: brightness(0%);
+  }
+  60% {
+    opacity: 1;
+    filter: brightness(100%);
+  }
+  80% {
+    opacity: 0;
+    filter: brightness(0%);
+  }
+  100% {
+    opacity: 0;
+    filter: brightness(0%);
+  }
+}
+
+.configured {
+  color: #ff073a;
+  text-shadow: 0em 0em 0.5em #d3002b;
+  font-size: 25px;
+  animation: configuredFadeIn;
+  animation-duration: 18s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+  filter: brightness(0%);
+}
+
+@keyframes configuredFadeIn {
+  0% {
+    filter: brightness(0%);
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+    filter: brightness(0%);
+  }
+  70% {
+    opacity: 1;
+    filter: brightness(100%);
+  }
+  90% {
+    opacity: 0;
+    filter: brightness(0%);
+  }
+  100% {
+    opacity: 0;
+    filter: brightness(0%);
+  }
+}
+
+.click-to-play {
+  font-family: "AlienSolidItalic";
+  font-size: 85px;
+  color: #15f2ff;
+  text-shadow: 0em 0em 0.5em #15f2ff;
+  animation: clickPlayFadeIn;
+  animation-duration: 18s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes clickPlayFadeIn {
+  0% {
+    filter: brightness(0%);
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+    filter: brightness(0%);
+  }
+  80% {
+    opacity: 1;
+    filter: brightness(100%);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(100%);
+  }
+}
+
+a {
+  text-decoration: none;
+}

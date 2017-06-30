@@ -5,22 +5,16 @@
 	<title>Word Guess</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="./css/game.css" rel="stylesheet">
+	<link href="./css/index.css" rel="stylesheet">
 </head>
 
 <body>
 	<div class="background-image"></div>
 	<div class="game-container">
 		<h1 class="headline">WORDQUEST: IMPOSSIBLE</h1>
-		<h3>RANDOM WORD SELECTED... STORING NOW...</h3>
-		<h3>{{game.userDisplayString}}</h3>
-		<h4>GUESSES REMAINING:  {{game.guessAmount}}</h4>
-		<h4>{{game.statusMessage}}</h4>
-		<form action="/guess" method="post">
-			<input type="text" name="guess" id="userGuess" maxlength="1" autofocus="autofocus" placeholder="guess a letter">
-			<input type="submit" value="take a guess">
-		</form>
-		<h3>LETTERS GUESSED:  {{game.userDisplayGuessed}}<span class="blinking-cursor">|</span></h3>
+		<h3 class="randomword">RANDOM WORD SELECTED... STORING NOW...</h3>
+		<h3 class="configured">GAME CONFIGURED!</h3>
+		<a href="./game"><h2 class="click-to-play">Click to Play</h2></a>
 	</div>
 </body>
 
