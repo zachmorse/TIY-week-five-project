@@ -44,7 +44,7 @@ body {
   background-size: 100%;
   filter: grayscale(0%) blur(0px);
   overflow: hidden;
-  animation: backgroundInit 7s ease-in-out 1;
+  animation: backgroundInit 8s ease-in-out 1;
 }
 
 @keyframes backgroundInit {
@@ -55,26 +55,29 @@ body {
     background-position-y: 110%;
     background-image: url("../images/img1.jpeg");
   }
-  40% {
-    background-position-y: 40%;
-    transform: scale3d(1, 1, 1);
-    filter: grayscale(100%);
-  }
   50% {
+    /*background-position-y: 40%;*/
+    filter: grayscale(100%);
     filter: brightness(0%);
     filter: grayscale(100%);
+    /*transform: scale3d(2, 2, 2);*/
   }
   65% {
+    background-position-y: 0%;
     background-image: url("../images/img1.jpeg");
-    filter: grayscale(100%);
-    transform: scale3d(10, 10, 10);
+    filter: grayscale(100%) brightness(0%);
+    transform: scale3d(3, 3, 3);
   }
   70% {
+    background-position-y: 40%;
+    transform: scale3d(1, 1, 1);
+  }
+  75% {
     filter: blur(0px);
     filter: grayscale(0%);
     background-image: url("../images/img2.jpeg");
-    transform: scale3d(1, 1, 1);
-    filter: brightness(500%);
+    /*transform: scale3d(1, 1, 1);*/
+    filter: brightness(1000%);
   }
   100% {
     filter: brightness(100%);
@@ -99,7 +102,7 @@ body {
   -webkit-text-fill-color: transparent;
   text-shadow: 0px -7px 1px white;
   animation: headlineFadeIn;
-  animation-duration: 6s;
+  animation-duration: 8s;
   animation-timing-function: ease-in-out;
 }
 
