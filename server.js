@@ -76,15 +76,6 @@ var game = {};
 var mysteryWord;
 var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,./~`-=";
 
-// var displayArray = (function() {
-//   var dummyArray = [];
-//   var arrayLength = mysteryWord.length;
-//   for (var i = 0; i < arrayLength; i++) {
-//     dummyArray.push("_");
-//   }
-//   return dummyArray;
-// })();
-
 function gameGenerator() {
   mysteryWord = mysteryWordGen();
 
