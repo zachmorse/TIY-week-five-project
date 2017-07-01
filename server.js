@@ -41,72 +41,94 @@ function gameValidator(req, res, next) {
   }
 }
 
-// --- game variables
-const affirmations = [
-  "EXCELLENT",
-  "IT CHECKS OUT",
-  "AFFIRMATIVE",
-  "CORRECT",
-  "DATABASE_CLEAR = FALSE",
-  "BOOLEAN_TRUE!",
-  "OK",
-  "GUESS_STATUS=CORRECT"
-];
-
-const consolations = [
-  "NOT FOUND",
-  "RETRIEVAL ERROR",
-  "NEGATIVE, UNFOUND",
-  "INCORRECT",
-  "FALSE"
-];
-
 function affirmativeWords() {
+  const affirmations = [
+    "EXCELLENT",
+    "IT CHECKS OUT",
+    "AFFIRMATIVE",
+    "CORRECT",
+    "DATABASE_CLEAR = FALSE",
+    "BOOLEAN_TRUE!",
+    "OK",
+    "GUESS_STATUS=CORRECT"
+  ];
   return affirmations[Math.floor(Math.random() * 8)];
 }
 
 function consolationWords() {
+  const consolations = [
+    "NOT FOUND",
+    "RETRIEVAL ERROR",
+    "NEGATIVE, UNFOUND",
+    "INCORRECT",
+    "FALSE"
+  ];
   return consolations[Math.floor(Math.random() * 5)];
 }
 
-const mysteryWord = words[Math.floor(Math.random() * 234936)]
-  .toUpperCase()
-  .split("");
+function mysteryWordGen() {
+  return words[Math.floor(Math.random() * 234936)].toUpperCase().split("");
+}
+
+// --- game variables
+
+var game = {};
+var mysteryWord;
 var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,./~`-=";
-var displayArray = (function() {
-  var dummyArray = [];
-  var arrayLength = mysteryWord.length;
-  for (var i = 0; i < arrayLength; i++) {
-    dummyArray.push("_");
-  }
-  return dummyArray;
-})();
 
-var game = {
-  guessAmount: 8,
-  mysteryWord: mysteryWord,
-  lettersGuessed: [],
-  userDisplayGuessed: " ",
-  displayArray: displayArray,
-  userDisplayString: displayArray.join(" "),
-  statusMessage: "Type To Begin",
-  endingMessage: ""
-};
+// var displayArray = (function() {
+//   var dummyArray = [];
+//   var arrayLength = mysteryWord.length;
+//   for (var i = 0; i < arrayLength; i++) {
+//     dummyArray.push("_");
+//   }
+//   return dummyArray;
+// })();
 
-console.log("Game word: ", game.mysteryWord.join(""));
+function gameGenerator() {
+  mysteryWord = mysteryWordGen();
+
+  var displayArray = (function() {
+    var dummyArray = [];
+    var arrayLength = mysteryWord.length;
+    for (var i = 0; i < arrayLength; i++) {
+      dummyArray.push("_");
+    }
+    return dummyArray;
+  })();
+
+  game = {
+    guessAmount: 8,
+    mysteryWord: mysteryWord,
+    lettersGuessed: [],
+    userDisplayGuessed: " ",
+    displayArray: displayArray,
+    userDisplayString: displayArray.join(" "),
+    statusMessage: "Type To Begin",
+    endingMessage: ""
+  };
+
+  console.log("Game word: ", game.mysteryWord.join(""));
+}
+
+function gameReset() {
+  game.GuessAmount = 8;
+  game.mysteryWord = mysteryWord;
+  game.lettersGuessed = [];
+  game.userDisplayGuessed = " ";
+  game.statusMessage = "Type To Begin";
+  game.endingMessage = "";
+}
 
 // --- ROUTES
 
 app.get("/", function(req, res) {
+  gameGenerator();
   res.render("index");
 });
 
 app.get("/game", gameValidator, function(req, res) {
   res.render("game", { game: game });
-});
-
-app.get("/gameover", function(req, res) {
-  res.render("gameover", { game: game });
 });
 
 app.post("/guess", function(req, res) {
@@ -121,7 +143,7 @@ app.post("/guess", function(req, res) {
     }
   }
 
-  function inputValidator() {
+  function gameEngine() {
     if (userGuess.length == 0) {
       game.statusMessage = "You Must Enter A Character.";
       res.redirect("/game");
@@ -148,14 +170,21 @@ app.post("/guess", function(req, res) {
     var errors = req.validationErrors();
   }
 
-  inputValidator();
+  gameEngine();
   game.userDisplayString = game.displayArray.join(" ");
   game.userDisplayGuessed = game.lettersGuessed.join(" ");
   res.redirect("/game");
 });
 
+app.get("/gameover", function(req, res) {
+  res.render("gameover", { game: game });
+});
+
 app.get("/gamereset", function(req, res) {
-  res.redirect("/");
+  mysteryWordGen();
+  gameGenerator();
+  gameReset();
+  res.redirect("/game");
 });
 
 // LISTENER
