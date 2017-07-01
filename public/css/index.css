@@ -1,16 +1,16 @@
 @font-face {
   font-family: "Streamster";
-  src: url("../fonts/Streamster.ttf"); /* TTF file for CSS3 browsers */
+  src: url("../fonts/Streamster.ttf");
 }
 
 @font-face {
   font-family: "Lazer84";
-  src: url("../fonts/Lazer84.ttf"); /* TTF file for CSS3 browsers */
+  src: url("../fonts/Lazer84.ttf");
 }
 
 @font-face {
   font-family: "AlienSolidItalic";
-  src: url("../fonts/SFAlienEncountersSolid-Ital.ttf"); /* TTF file for CSS3 browsers */
+  src: url("../fonts/SFAlienEncountersSolid-Ital.ttf");
 }
 
 body {
@@ -45,7 +45,7 @@ body {
   background-size: 100%;
   filter: grayscale(0%) blur(0px);
   overflow: hidden;
-  animation: backgroundInit 8s ease-in-out 1;
+  animation: backgroundInit 16s ease-out 1;
 }
 
 @keyframes backgroundInit {
@@ -56,34 +56,33 @@ body {
     background-position-y: 110%;
     background-image: url("../images/img1.jpeg");
   }
-  50% {
-    /*background-position-y: 40%;*/
+  25% {
     filter: grayscale(100%);
     filter: brightness(0%);
     filter: grayscale(100%);
-    /*transform: scale3d(2, 2, 2);*/
   }
-  60% {
+  30% {
     background-position-y: 0%;
     background-image: url("../images/img1.jpeg");
     filter: grayscale(100%) brightness(0%);
     transform: scale3d(3, 3, 3);
   }
-  65% {
-    background-position-y: 40%;
-    transform: scale3d(1, 1, 1);
+  32% {
+    background-position-y: 30%;
+    transform: scale3d(1.25, 1.25, 1.25);
     filter: blur(20px) grayscale(100%) brightness(0%);
   }
-  70% {
+  35% {
     background-image: url("../images/img2.jpeg");
-    /*transform: scale3d(2.5, 2.5, 2.5);*/
+    transform: scale3d(1.25, 1.25, 1.25);
     filter: blur(20px) brightness(1000%) grayscale(0%);
   }
-  80% {
-    /*transform: scale3d(2.5, 2.5, 2.5);*/
+
+  50% {
+    filter: blur(0px) brightness(100%);
+    transform: scale3d(1.25, 1.25, 1.25);
   }
   100% {
-    filter: blur(0px) brightness(100%);
     transform: scale3d(1, 1, 1);
   }
 }

@@ -53,11 +53,23 @@ const affirmations = [
   "GUESS_STATUS=CORRECT"
 ];
 
+const consolations = [
+  "NOT FOUND",
+  "RETRIEVAL ERROR",
+  "NEGATIVE, UNFOUND",
+  "INCORRECT",
+  "FALSE"
+];
+
 function affirmativeWords() {
   return affirmations[Math.floor(Math.random() * 8)];
 }
 
-const mysteryWord = words[Math.floor(Math.random() * 200000)]
+function consolationWords() {
+  return consolations[Math.floor(Math.random() * 5)];
+}
+
+const mysteryWord = words[Math.floor(Math.random() * 234936)]
   .toUpperCase()
   .split("");
 var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,./~`-=";
@@ -121,7 +133,7 @@ app.post("/guess", function(req, res) {
     } else if (mysteryWord.indexOf(userGuess) < 0) {
       game.guessAmount -= 1;
       game.lettersGuessed.push(userGuess);
-      game.statusMessage = "Sorry, Try Again.";
+      game.statusMessage = consolationWords();
       res.redirect("/game");
     } else {
       mysteryWord.forEach(function(letter, index) {
@@ -140,6 +152,10 @@ app.post("/guess", function(req, res) {
   game.userDisplayString = game.displayArray.join(" ");
   game.userDisplayGuessed = game.lettersGuessed.join(" ");
   res.redirect("/game");
+});
+
+app.get("/gamereset", function(req, res) {
+  res.redirect("/");
 });
 
 // LISTENER

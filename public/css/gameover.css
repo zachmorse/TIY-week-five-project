@@ -32,27 +32,30 @@ body {
   left: 0;
   z-index: -1;
   background-size: 100%;
-  filter: grayscale(0%) blur(0px) brightness(0%);
+  filter: grayscale(60%) blur(5px) brightness(30%);
   overflow: hidden;
-  /*animation: gameOverFade 15s 1;*/
+  animation: gameOverFade 10s 1;
 }
 
 @keyframes gameOverFade {
   0% {
-    filter: brightness(100%);
+    filter: brightness(100%) grayscale(0%) blur(0px);
+    transform: scale3d(1, 1, 1);
   }
   5% {
-    filter: brightness(1000%);
+    filter: brightness(1000%) grayscale(100%);
+    transform: scale3d(2, 2, 2);
   }
 
-  30% {
+  40% {
     filter: brightness(100%);
   }
   70% {
-    filter: brightness(0%);
+    filter: brightness(100%) grayscale(100%) blur(0px);
   }
   100% {
-    filter: brightness(0);
+    filter: brightness(30%) grayscale(60%) blur(5px);
+    transform: scale3d(1, 1, 1);
   }
 }
 
@@ -82,13 +85,46 @@ body {
   text-shadow: 0em 0em 0.5em #d3002b;
   padding: 2rem 0rem;
   margin-bottom: -1rem;
+  animation: wordFade 1s 4;
+  opacity: 0;
+}
+
+@keyframes wordFade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .end-message {
   font-size: 80px;
+  color: #ff073a;
+  text-shadow: 0em 0em 0.5em #d3002b;
   margin: 2rem 0rem;
   position: relative;
   bottom: 9.5rem;
+  opacity: 1;
+  animation: gameOutcome 10s 1;
+}
+
+@keyframes gameOutcome {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+    filter: brightness(100%);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(200%);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(100%);
+  }
 }
 
 .click-to-play {
@@ -98,6 +134,24 @@ body {
   text-shadow: 0em 0em 0.5em #00cbd4;
   position: relative;
   bottom: 11.5rem;
+  animation: linkPopup 10s 1;
+}
+
+@keyframes linkPopup {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+    filter: brightness(100%);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(100%);
+  }
 }
 
 a {
