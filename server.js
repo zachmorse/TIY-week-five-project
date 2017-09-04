@@ -10,10 +10,10 @@ const expressValidator = require("express-validator");
 const app = express();
 const port = process.env.PORT || 7500;
 
-const words = fs
-  .readFileSync("/usr/share/dict/words", "utf-8")
-  .toLowerCase()
-  .split("\n");
+// const words = fs
+//   .readFileSync("/usr/share/dict/words", "utf-8")
+//   .toLowerCase()
+//   .split("\n");
 const gameWords = require("./data/gameWords");
 const affirmations = require("./data/affirmations");
 const consolations = require("./data/consolations");
