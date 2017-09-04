@@ -9,10 +9,14 @@ const fs = require("file-system");
 const expressValidator = require("express-validator");
 const app = express();
 const port = process.env.PORT || 7500;
+
 const words = fs
   .readFileSync("/usr/share/dict/words", "utf-8")
   .toLowerCase()
   .split("\n");
+const gameWords = require("./data/gameWords");
+const affirmations = require("./data/affirmations");
+const consolations = require("./data/consolations");
 
 // --- set view engine:
 
@@ -42,32 +46,16 @@ function gameValidator(req, res, next) {
 }
 
 function affirmativeWords() {
-  const affirmations = [
-    "EXCELLENT",
-    "IT CHECKS OUT",
-    "AFFIRMATIVE",
-    "CORRECT",
-    "DATABASE_CLEAR = FALSE",
-    "BOOLEAN_TRUE!",
-    "OK",
-    "GUESS_STATUS=CORRECT"
-  ];
   return affirmations[Math.floor(Math.random() * 8)];
 }
 
 function consolationWords() {
-  const consolations = [
-    "NOT FOUND",
-    "RETRIEVAL ERROR",
-    "NEGATIVE, UNFOUND",
-    "INCORRECT",
-    "FALSE"
-  ];
   return consolations[Math.floor(Math.random() * 5)];
 }
 
 function mysteryWordGen() {
-  return words[Math.floor(Math.random() * 234936)].toUpperCase().split("");
+  // return words[Math.floor(Math.random() * 234936)].toUpperCase().split("");
+  return gameWords[Math.floor(Math.random() * 20)].toUpperCase().split("");
 }
 
 // --- game variables
@@ -78,7 +66,6 @@ var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,./~`-=";
 
 function gameGenerator() {
   mysteryWord = mysteryWordGen();
-
   var displayArray = (function() {
     var dummyArray = [];
     var arrayLength = mysteryWord.length;
@@ -99,7 +86,7 @@ function gameGenerator() {
     endingMessage: ""
   };
 
-  console.log("Game word: ", game.mysteryWord.join(""));
+  console.log("Game word:", game.mysteryWord.join(""));
 }
 
 function gameReset() {
