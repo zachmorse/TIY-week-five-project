@@ -143,6 +143,7 @@ app.post("/guess", function(req, res) {
       });
       game.lettersGuessed.push(userGuess);
       game.statusMessage = affirmativeWords();
+      res.redirect("/game");
     }
 
     var errors = req.validationErrors();
@@ -151,7 +152,6 @@ app.post("/guess", function(req, res) {
   gameEngine();
   game.userDisplayString = game.displayArray.join(" ");
   game.userDisplayGuessed = game.lettersGuessed.join(" ");
-  res.redirect("/game");
 });
 
 app.get("/gameover", function(req, res) {
